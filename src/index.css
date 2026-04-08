@@ -1,18 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Roboto:wght@300;400;500;700;900&family=Permanent+Marker&family=Courier+Prime:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Custom Font Face for Pricedown */
+@font-face {
+  font-family: 'Pricedown';
+  src: url('/fonts/pricedown.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   :root {
-    /* Street Brutal Color System */
-    --street-black: #0A0A0A;
-    --street-asphalt: #1A1A1A;
-    --street-concrete: #2D2D2D;
-    --gang-green: #4A7C4E;
-    --gang-gold: #D4AF37;
-    --gang-red: #C41E3A;
+    /* GTA V Color System */
+    --gta-black: #0d1116;
+    --gta-graphite: #1c1d21;
+    --gta-dark: #32383d;
+    --gta-medium: #454b4f;
+    --gta-light: #979a97;
+    --gta-white: #ffffff;
+    --gta-green: #0051ff;
+    --gta-gold: #00fff2;
+    --gta-blue: #61B5CB;
+    --gta-salmon: #00e1ff;
   }
 
   * {
@@ -26,335 +39,354 @@
   }
 
   body {
-    @apply bg-street-black text-street-white font-body;
+    @apply bg-gta-black text-white font-inter;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    position: relative;
-  }
-
-  body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cfilter id='noise'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3C/defs%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 1;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-stencil uppercase tracking-wide;
+    @apply font-bebas tracking-wide;
   }
 
   /* Custom scrollbar */
   ::-webkit-scrollbar {
-    width: 12px;
+    width: 8px;
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-street-black;
-    border-left: 1px solid #2D2D2D;
+    @apply bg-gta-black;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-street-metal;
-    border-left: 2px solid #D4AF37;
+    @apply bg-gta-medium rounded-full;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-gang-gold;
+    @apply bg-gta-light;
   }
 }
 
 @layer components {
   /* Container */
-  .container-street {
+  .container-gta {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-    position: relative;
-    z-index: 2;
   }
 
   /* Typography */
-  .heading-brutal {
-    @apply font-stencil text-street-white uppercase;
-    text-shadow: 3px 3px 0px rgba(0, 0, 0, 1);
-    letter-spacing: 0.05em;
+  .heading-gta {
+    @apply font-bebas text-white tracking-wider;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   }
 
-  .text-graffiti {
-    @apply font-tag;
-    transform: rotate(-2deg);
-    display: inline-block;
+  .text-gold {
+    @apply text-gta-gold;
   }
 
-  /* Brutal Buttons */
-  .btn-brutal {
-    @apply relative px-8 py-3 font-stencil uppercase tracking-wider transition-all duration-200;
-    @apply bg-gang-green text-street-black shadow-brutal hover:shadow-brutal-lg;
-    @apply hover:translate-x-[-4px] hover:translate-y-[-4px];
-    border: 2px solid #000;
-    position: relative;
-    overflow: hidden;
+  /* Buttons */
+  .btn-gta {
+    @apply px-8 py-3 font-inter font-medium uppercase tracking-wider transition-all duration-300;
+    @apply bg-gta-green text-white hover:bg-opacity-90;
+    @apply shadow-gta hover:shadow-gta-hover;
+    letter-spacing: 0.1em;
   }
 
-  .btn-brutal::before {
+  .btn-gta-outline {
+    @apply px-8 py-3 font-inter font-medium uppercase tracking-wider transition-all duration-300;
+    @apply border-2 border-gta-green text-gta-green hover:bg-gta-green hover:text-white;
+    letter-spacing: 0.1em;
+  }
+
+  .btn-gta-gold {
+    @apply px-8 py-3 font-inter font-medium uppercase tracking-wider transition-all duration-300;
+    @apply bg-gta-gold text-gta-black hover:bg-opacity-90;
+    @apply shadow-gta hover:shadow-gta-hover;
+    letter-spacing: 0.1em;
+  }
+
+  /* Cards */
+  .card-gta {
+    @apply bg-gta-graphite backdrop-blur-sm p-6 transition-all duration-300;
+    @apply shadow-card hover:shadow-card-hover;
+    @apply hover:-translate-y-1;
+  }
+
+  /* Glass Effect */
+  .glass-gta {
+    @apply backdrop-blur-lg bg-gta-black/95;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Loading Bar */
+  .loading-bar {
+    @apply h-1 bg-gta-gold;
+    animation: loading 2s ease-in-out infinite;
+  }
+
+  @keyframes loading {
+    0% { width: 0%; }
+    50% { width: 70%; }
+    100% { width: 100%; }
+  }
+
+  /* Progress Bar */
+  .progress-bar {
+    @apply relative h-2 bg-gta-dark overflow-hidden;
+  }
+
+  .progress-bar::after {
     content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
+    @apply absolute inset-0 bg-loading-gradient;
+    animation: shimmer 2s infinite;
   }
 
-  .btn-brutal:hover::before {
-    left: 100%;
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
   }
 
-  .btn-brutal-outline {
-    @apply px-8 py-3 font-stencil uppercase tracking-wider transition-all duration-200;
-    @apply border-2 border-gang-gold text-gang-gold bg-transparent;
-    @apply shadow-brutal-sm hover:shadow-brutal;
-    @apply hover:bg-gang-gold hover:text-street-black;
-    @apply hover:translate-x-[-2px] hover:translate-y-[-2px];
+  /* GTA Menu Style */
+  .menu-gta {
+    @apply bg-gta-graphite/95 backdrop-blur-md;
+    border-left: 4px solid var(--gta-green);
   }
 
-  /* Street Cards */
-  .card-street {
-    @apply bg-street-asphalt border-2 border-street-black p-6;
-    @apply shadow-brutal hover:shadow-brutal-lg transition-all duration-200;
-    @apply hover:translate-x-[-4px] hover:translate-y-[-4px];
-    position: relative;
-    overflow: hidden;
+  .menu-item-gta {
+    @apply px-6 py-3 text-white/80 hover:text-white hover:bg-gta-dark/50;
+    @apply transition-all duration-200 cursor-pointer;
+    @apply border-l-4 border-transparent hover:border-gta-gold;
+    margin-left: -4px;
   }
 
-  .card-street::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    @apply bg-gang-gold;
+  .menu-item-active {
+    @apply text-white bg-gta-dark/50 border-gta-gold;
   }
 
-  .card-street::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    @apply bg-concrete-texture;
-    pointer-events: none;
+  /* Stats Display */
+  .stat-label {
+    @apply text-gta-light text-sm uppercase tracking-wider;
   }
 
-  /* Tape effect */
-  .tape-top {
-    position: relative;
+  .stat-value {
+    @apply text-white text-2xl font-rajdhani font-bold;
   }
 
-  .tape-top::before {
-    content: '';
-    position: absolute;
-    top: -15px;
-    left: 20%;
-    width: 100px;
-    height: 30px;
-    background: rgba(212, 175, 55, 0.8);
-    transform: rotate(-5deg);
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  /* Divider */
+  .divider-gta {
+    @apply h-px bg-gradient-to-r from-transparent via-gta-medium to-transparent my-8;
   }
 
-  /* Police tape */
-  .police-tape {
-    @apply bg-gang-gold text-street-black font-stencil uppercase py-2 px-4;
-    background-image: repeating-linear-gradient(
-      45deg,
-      #D4AF37,
-      #D4AF37 20px,
-      #000 20px,
-      #000 40px
-    );
-    letter-spacing: 0.2em;
+  /* Badge */
+  .badge-gta {
+    @apply inline-flex items-center px-3 py-1 text-xs font-medium uppercase tracking-wider;
+    @apply bg-gta-green/20 text-gta-green border border-gta-green/30;
   }
 
-  /* Graffiti text */
-  .graffiti-text {
-    @apply font-tag text-spray-pink;
-    text-shadow: 
-      2px 2px 0px #000,
-      3px 3px 0px rgba(255, 20, 147, 0.5);
-    transform: rotate(-5deg) skew(-10deg);
+  .badge-gold {
+    @apply bg-gta-gold/20 text-gta-gold border-gta-gold/30;
   }
 
-  /* Street divider */
-  .divider-street {
-    @apply relative h-20 my-8;
-    overflow: hidden;
+  /* Smooth Animations */
+  .animate-smooth {
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .divider-street::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: repeating-linear-gradient(
-      90deg,
-      #FFD700 0px,
-      #FFD700 40px,
-      transparent 40px,
-      transparent 80px
-    );
+  /* Loading Screen Style */
+  .loading-screen {
+    @apply fixed inset-0 bg-gta-black z-50 flex items-center justify-center;
   }
 
-  /* Concrete wall */
-  .wall-concrete {
-    @apply bg-street-concrete relative;
-    background-image: 
-      repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0, 0, 0, 0.1) 2px, rgba(0, 0, 0, 0.1) 4px),
-      repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.1) 2px, rgba(0, 0, 0, 0.1) 4px);
+  .loading-content {
+    @apply text-center;
   }
 
-  /* Stamp effect */
-  .stamp {
-    @apply font-stamp uppercase;
-    @apply text-gang-red border-2 border-gang-red px-3 py-1;
-    transform: rotate(-5deg);
-    display: inline-block;
-    position: relative;
+  .loading-logo {
+    @apply text-6xl font-pricedown text-white mb-8;
+    animation: fadeIn 1s ease-out;
   }
 
-  .stamp::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle, transparent 30%, rgba(196, 30, 58, 0.1) 70%);
+  .loading-tips {
+    @apply text-gta-light text-sm max-w-md mx-auto;
+    animation: fadeIn 1s ease-out 0.5s both;
   }
 
-  /* Loading Screen */
-  .loading-screen-street {
-    @apply fixed inset-0 bg-street-black z-50 flex items-center justify-center;
-    background-image: 
-      radial-gradient(circle at 20% 50%, rgba(74, 124, 78, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 80% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+  /* Hover Effects */
+  .hover-lift {
+    @apply transition-transform duration-300 hover:-translate-y-2;
   }
 
-  /* Street grid */
-  .grid-street {
-    @apply grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
-    position: relative;
-  }
-
-  /* Polaroid style */
-  .polaroid {
-    @apply bg-street-cream p-3 pb-12 shadow-brutal;
-    transform: rotate(-2deg);
-    position: relative;
-  }
-
-  .polaroid::after {
-    content: attr(data-caption);
-    position: absolute;
-    bottom: 8px;
-    left: 50%;
-    transform: translateX(-50%);
-    @apply font-tag text-street-black text-sm;
-  }
-
-  /* Mugshot style */
-  .mugshot {
-    @apply relative bg-street-concrete border-2 border-street-black;
-    position: relative;
-  }
-
-  .mugshot::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 20px,
-      rgba(255, 255, 255, 0.05) 20px,
-      rgba(255, 255, 255, 0.05) 21px
-    );
-    pointer-events: none;
-  }
-
-  /* Chain link overlay */
-  .chain-link-overlay {
-    position: relative;
-  }
-
-  .chain-link-overlay::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    @apply bg-chain-link;
-    pointer-events: none;
-  }
-}
-
-@layer utilities {
-  /* Text styles */
-  .text-shadow-brutal {
-    text-shadow: 4px 4px 0px rgba(0, 0, 0, 1);
-  }
-
-  .text-shadow-graffiti {
-    text-shadow: 
-      2px 2px 0px #000,
-      3px 3px 0px rgba(212, 175, 55, 0.5),
-      4px 4px 8px rgba(0, 0, 0, 0.8);
-  }
-
-  /* Gradient text */
-  .gradient-gold {
-    @apply bg-gradient-to-b from-gang-gold via-yellow-300 to-gang-gold bg-clip-text text-transparent;
-  }
-
-  .gradient-street {
-    @apply bg-gradient-to-r from-gang-green via-gang-gold to-gang-red bg-clip-text text-transparent;
-  }
-
-  /* Animations */
-  .shake {
-    animation: shake 0.5s infinite;
-  }
-
-  @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-2px) rotate(-1deg); }
-    75% { transform: translateX(2px) rotate(1deg); }
-  }
-
-  .flicker {
-    animation: flicker 2s infinite;
-  }
-
-  @keyframes flicker {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.8; }
-    51% { opacity: 1; }
-    60% { opacity: 0.8; }
-    61% { opacity: 1; }
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-105;
   }
 
   /* Section Spacing */
   .section-padding {
-    @apply py-16 md:py-24;
+    @apply py-20 md:py-32;
+  }
+
+  /* Grid Layouts */
+  .grid-gta {
+    @apply grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
+  }
+
+  /* Text Styles */
+  .text-muted {
+    @apply text-gta-light;
+  }
+
+  .text-accent {
+    @apply text-gta-gold;
+  }
+
+  /* Input Styles */
+  .input-gta {
+    @apply w-full px-4 py-3 bg-gta-graphite border border-gta-medium;
+    @apply focus:border-gta-green focus:outline-none focus:ring-1 focus:ring-gta-green;
+    @apply text-white placeholder-gta-light;
+    @apply transition-all duration-200;
+  }
+
+  /* Select Style */
+  .select-gta {
+    @apply input-gta appearance-none cursor-pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23979a97'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+  }
+}
+
+@layer utilities {
+  /* Smooth Scroll */
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+
+  /* No Scrollbar */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Text Shadow */
+  .text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .text-shadow-lg {
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.7);
+  }
+
+  /* Gradient Text */
+  .gradient-gold {
+    @apply bg-gradient-to-r from-gta-gold via-yellow-300 to-gta-gold bg-clip-text text-transparent;
+  }
+
+  .gradient-green {
+    @apply bg-gradient-to-r from-gta-green via-green-500 to-gta-olive bg-clip-text text-transparent;
+  }
+
+  /* Image optimization */
+  img {
+    @apply max-w-full h-auto;
+  }
+  
+  /* Lazy loading background */
+  img[loading="lazy"] {
+    @apply bg-gta-graphite;
+  }
+
+  /* Image hover effects */
+  .img-zoom {
+    @apply transition-transform duration-500 hover:scale-110;
+  }
+
+  /* Mobile Touch Feedback */
+  .touch-ripple {
+    @apply absolute inset-0 rounded-lg;
+    background: radial-gradient(circle, rgba(254, 217, 133, 0.3) 0%, transparent 70%);
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  a:active .touch-ripple,
+  button:active .touch-ripple {
+    animation: ripple 0.4s ease-out;
+  }
+
+  @keyframes ripple {
+    0% {
+      transform: scale(0);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0;
+    }
+  }
+
+  /* Bounce in animation */
+  .animate-bounce-in {
+    animation: bounceIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  @keyframes bounceIn {
+    0% {
+      transform: translateX(-50%) translateY(100%);
+      opacity: 0;
+    }
+    60% {
+      transform: translateX(-50%) translateY(-10%);
+    }
+    100% {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+  }
+
+  /* Fade out animation */
+  .animate-fade-out {
+    animation: fadeOut 0.3s ease-out forwards;
+  }
+
+  @keyframes fadeOut {
+    to {
+      opacity: 0;
+      transform: translateX(-50%) translateY(20px);
+    }
   }
 
   /* Mobile optimizations */
   @media (max-width: 1023px) {
+    /* Adjust body padding for fixed navigation */
     body {
+      padding-top: 0;
       padding-bottom: 88px;
     }
 
+    /* Touch-friendly tap targets */
+    button, a {
+      min-height: 44px;
+      min-width: 44px;
+    }
+
+    /* Prevent horizontal scroll */
+    html, body {
+      overflow-x: hidden;
+      max-width: 100vw;
+    }
+
+    /* Improve readability on mobile */
+    .container-gta {
+      @apply px-4;
+    }
+
+    /* Adjust heading sizes for mobile */
     h1 {
       @apply text-4xl;
     }
@@ -367,16 +399,35 @@
       @apply text-2xl;
     }
 
+    /* Mobile-optimized cards */
+    .card-gta {
+      @apply p-4;
+    }
+
+    /* Reduce section padding on mobile */
     .section-padding {
       @apply py-12;
     }
+  }
 
-    .btn-brutal {
-      @apply shadow-brutal-sm;
+  /* Safe area insets for notched devices */
+  @supports (padding: env(safe-area-inset-bottom)) {
+    .bottom-navigation {
+      padding-bottom: env(safe-area-inset-bottom);
     }
 
-    .card-street {
-      @apply shadow-brutal-sm;
+    .mobile-top-bar {
+      padding-top: env(safe-area-inset-top);
+    }
+  }
+
+  /* Smooth scrolling with reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
     }
   }
 }
