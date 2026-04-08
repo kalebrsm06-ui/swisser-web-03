@@ -55,7 +55,7 @@
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-gta-black;
+    @apply bg-black;
   }
 
   ::-webkit-scrollbar-thumb {
